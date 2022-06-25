@@ -23,7 +23,7 @@ if ($handle) {                                      #if file is opened
   $counter = 0;
   foreach($a as $x => $x_value){                    
     if($counter<10){
-      echo "Imie: " . ucwords(mb_strtolower($x)) . " & " . "Ilosc: " . $x_value . ";\n";
+      echo "Imię: " . ucwords(mb_strtolower($x)) . " & " . "Ilość: " . $x_value . ";\n";
   }
   $counter++;
 }
