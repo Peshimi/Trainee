@@ -23,17 +23,16 @@ zostawić :DD
 
 2.
   W zadaniu drugim pojawiły się dwa elementy do poprawy: 
-a)  "białe znaki" czyli tak zwane white spaces- trochę o tym poczytałam, nie wiem do końca skąd się to bierze, ale
-   przynajmnej wiem jak to sprawdzić przy pomocy funkcji var_dump() i komendy 'cat' z parametrem '-E' oraz jak to 
-   naprawić -> funkcją trim();  
+a)  "białe znaki" czyli tak zwane white spaces- zazwyczaj znak spacji, tab'u i nowej linii,
+   wiem jak to sprawdzić przy pomocy funkcji var_dump() i komendy 'cat' z parametrem '-E' oraz jak to zmienić -> funkcją trim();  
    Regex wykorzystałam z tej strony
    https://stackoverflow.com/questions/3760816/remove-new-lines-from-string-and-replace-with-one-empty-space
 b)  formatowanie daty przy pomocy funkcji wbudowanej w PHP: znalazłam funkcję date_format(), której porobiłam przykłady,
    przejrzałam jej zastosowanie i metodą prób i błędów udało mi się ją dodać do kodu.
 
 Uznałam że zostawię: robiłam sobie w notatniku notatki z rzeczy które testowałam, m. in. znalezienie białych
-znaków i wykorzystanie funkcji date_format(), wygodniej było mi trzymać w jednym miejscu kroki które podejmowałam wraz
-ze zmianami które miały miejsce, żeby analizować do się dokładnie stanie gdy zrobię tak etc. :)
+znaków i wykorzystanie funkcji date_format(), wygodniej było mi trzymać w jednym miejscu na kroki które podejmowałam wraz
+ze zmianami które miały miejsce, żeby analizować co się dokładnie stanie gdy zrobię tak etc. :)
 
 
 when -> $date = "$tmp[2].$tmp[1].$tmp[0]"; 
