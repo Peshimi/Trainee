@@ -1,0 +1,97 @@
+1.
+  Mimo funkcji zmniejszającej znaki w stringu [strtolower()], to znaki 'specjalne' typu Ł wyświetlały się duże. 
+Winowajcą był tzw. encoding czyli konwersja znaków z języka "ludzkiego" na język binarny. Ten system konwersji
+tekstu na bity nazywa się ASCII. Stworzony w 1960 roku uwzględniał tylko litery z alfabetu łacińskiego i jakieś
+podstawowe symbole typu '/', '?', '!'; łącznie ASCII posiada 256 różnych grup bajtów składających się z 8 bitów
+(bity składają się z 0 i 1).
+  
+  Gdy "IT" zaczęło stawać się bardziej globalne, inne kraje chciały mieć możliwość pisania kodu w swoim języku
+narodowym, czyli takim non-ASCII :D Developerzy musieli wymyślić sposób na konwersję wszystkich możliwych znaków 
+w jak najprostrzy sposób, i tak powstał Unicode.
+UTF-8 (system konwersji na Unicode) potrafi przetłumaczyć każdy znak w unikalny binarny string (ale również w 
+drugą stronę- może przetłumaczyć każdy binarny string w znak Unicode, dlatego UTF to skrót od Unicode 
+Transformation Format).  
+  
+  Odnosząc się do zadania: funkcja [strtolower()] zamienia znaki na mniejsze, ale wszystkie znaki specjalne w 
+stringu pozostają bez zmian (dlatego litera Ł w imionach pozostała nie zmieniona). Tu z pomocą przychodzi funkcja
+[mb_strtolower()] która już zmienia wszystkie znaki na mniejsze, nie zależnie od tego czy jest specjalny czy nie.
+
+* mało istotne w tym punkcie, ale jeszcze dodatkowo dla testu zamieniłam funkcję [ucfirst()] na [ucwords()]. W 
+samym działaniu kodu praktycznie nic to nie zmieniło, byłam ciekawa po prostu czy tak też zadziała i postanowiłam
+zostawić :DD
+
+
+2.
+  W zadaniu drugim pojawiły się dwa elementy do poprawy: 
+a)  "białe znaki" czyli tak zwane white spaces- trochę o tym poczytałam, nie wiem do końca skąd się to bierze, ale
+   przynajmnej wiem jak to sprawdzić przy pomocy funkcji var_dump() i komendy 'cat' z parametrem '-E' oraz jak to 
+   naprawić -> funkcją trim();  
+   Regex wykorzystałam z tej strony
+   https://stackoverflow.com/questions/3760816/remove-new-lines-from-string-and-replace-with-one-empty-space
+b)  formatowanie daty przy pomocy funkcji wbudowanej w PHP: znalazłam funkcję date_format(), której porobiłam przykłady,
+   przejrzałam jej zastosowanie i metodą prób i błędów udało mi się ją dodać do kodu.
+
+Uznałam że zostawię: robiłam sobie w notatniku notatki z rzeczy które testowałam, m. in. znalezienie białych
+znaków i wykorzystanie funkcji date_format(), wygodniej było mi trzymać w jednym miejscu kroki które podejmowałam wraz
+ze zmianami które miały miejsce, żeby analizować do się dokładnie stanie gdy zrobię tak etc. :)
+
+
+when -> $date = "$tmp[2].$tmp[1].$tmp[0]"; 
+Data: 13
+.04.2001 & Ilosc: 12;
+Data: 09
+.10.2001 & Ilosc: 11;
+Data: 24
+.05.2001 & Ilosc: 11;
+
+
+when -> $date = "\n$tmp[2].$tmp[1].$tmp[0]"; 
+Data:
+13
+.04.2001 & Ilosc: 12;
+Data:
+09
+.10.2001 & Ilosc: 11;
+Data:
+24
+.05.2001 & Ilosc: 11;
+
+
+when -> var_dump($tmp);
+array(3) {
+  [0]=>
+  string(4) "2000"
+  [1]=>
+  string(2) "10"
+  [2]=>
+  string(3) "03
+"
+}
+
+when -> var_dump($tmp); && var_dump(array("2001","01","02"));
+peshimi@Trainee $ php dodatkowe.php | cat -E
+array(3) {$
+  [0]=>$
+  string(4) "2000"$
+  [1]=>$
+  string(2) "10"$
+  [2]=>$
+  string(3) "03$
+"$
+}$
+array(3) {$
+  [0]=>$
+  string(4) "2001"$
+  [1]=>$
+  string(2) "01"$
+  [2]=>$
+  string(2) "02"$
+}$
+
+
+  1 <?php
+  2
+  3 $data = date_create("2022-06-24");
+  4 echo date_format($data, "d.m.Y");
+  5
+  6 ?>
